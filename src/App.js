@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useCallback } from "react";
+import Light from './Light';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function App() {
+ const [masterOn, setMasterOn] = useState(false);
+ const [kitchenOn, setKitchenOn] = useState(false);
+ const [bathOn, setBathOn] = useState(false);
+ const toggleMaster = useCallback(() => setMasterOn(!masterOn), [masterOn]);
+ const toggleKitchen = useCallback(() => setKitchenOn(!kitchenOn), [kitchenOn]);
+ const toggleBath = useCallback(() => setBathOn(!bathOn), [bathOn]);
+
+ return (
+  <div className="App">
+    <Light room="침실" on={masterOn} toggle={toggleMaster} />
+    <Light room="주방" on={kitchenOn} toggle={toggleKitchen} />
+    <Light room="욕실" on={bathOn} toggle={toggleBath} />
+  </div>
+ );
 }
-
-export default App;
